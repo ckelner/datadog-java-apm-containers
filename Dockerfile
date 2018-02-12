@@ -2,10 +2,9 @@ FROM ibmjava:jre
 
 # copy over our app
 WORKDIR /app
-COPY . /app
+COPY build/libs/gs-spring-boot-docker-0.1.0.jar /app
+# Might be hacky -- dunno
+COPY datadog/dd-java-agent.jar /app
 
-# get the Datadog java agent
-wget -O dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'
-
-EXPOSE 80
-CMD ["java", ""]
+EXPOSE 8080
+ENTRYPOINT ["java", "-javaagent:/app/dd-java-agent.jar", "-jar", "/app/gs-spring-boot-docker-0.1.0.jar"]
