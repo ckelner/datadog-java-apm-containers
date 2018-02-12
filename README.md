@@ -15,4 +15,11 @@ for container usage. See [Dockerfile](./Dockerfile).
 - (One time only) Run `gradle wrapper` to generate gradle wrapper (complete)
 - Run `./gradlew build`
 - Run `java -jar build/libs/gs-spring-boot-docker-0.1.0.jar` to test outside of Docker (hit `http://localhost:8080/`)
-- Run `docker build -t helloworld .`
+- Run `wget -O datadog/dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'`
+  - TODO: This should probably get covered as part of the gradle build process
+- Run to build the image: `docker build -t dd-java-apm-hello-world .`
+- Run to start the container: `docker run -d -p 8080:8080 --name dd-java-apm dd-java-apm-hello-world`
+- Run to see the containers running: `docker ps`
+- Run to see container logs: `docker logs dd-java-apm`
+- Run to stop the container: `docker stop dd-java-apm`
+- Run to remove the container: `docker rm dd-java-apm`
