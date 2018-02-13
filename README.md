@@ -36,29 +36,29 @@ Repo for testing/helping Datadog customer's get started with OpenJ9 Java APM usi
 ## Run the Datadog Dockerized Agent
 - Run to build the image: `docker build -t dd-agent ./agent/`
 - Run the following, replacing `{your_api_key_here}` with your own DD API key.
-```
-docker run -d --rm --name dd-agent \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -e API_KEY={your_api_key_here} \
-  -e DD_APM_ENABLED=true \
-  -p 8126:8126/tcp \
-  -e SD_BACKEND=docker \
-  -e LOG_LEVEL=DEBUG \
-  -e DD_LOGS_STDOUT=yes \
-  -e DD_PROCESS_AGENT_ENABLED=true \
-  dd-agent
-```
+  ```
+  docker run -d --rm --name dd-agent \
+    -v /var/run/docker.sock:/var/run/docker.sock:ro \
+    -v /proc/:/host/proc/:ro \
+    -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+    -e API_KEY={your_api_key_here} \
+    -e DD_APM_ENABLED=true \
+    -p 8126:8126/tcp \
+    -e SD_BACKEND=docker \
+    -e LOG_LEVEL=DEBUG \
+    -e DD_LOGS_STDOUT=yes \
+    -e DD_PROCESS_AGENT_ENABLED=true \
+    dd-agent
+  ```
 
 ## Run the Java example
 - Run `./gradlew build` (or `gradlew.bat` if on windows)
 - Run to build the docker image: `docker build -t dd-java-apm-hello-world .`
 - Run to start the container:
-```
-docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
--e TAGS=host:dd-java-apm-demo,env:demo
-```
+  ```
+  docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
+  -e TAGS=host:dd-java-apm-demo,env:demo
+  ```
 - Run to see the containers running: `docker ps`
 - Run to see container logs: `docker logs dd-java-apm`
 - Run to get to bash prompt for the container: `docker exec -it dd-java-apm /bin/bash`
@@ -70,9 +70,9 @@ These may be due to user error, and therefore may not be valid issues with OpenJ
 
 1. When using the OpenJ9 JRE all resources (`/`, `/slow`, & `/sleepy`) are **NOT** reported.
 To reproduce, follow the instructions in the section [Send APM Metrics to Datadog (OpenJ9)](#send-apm-metrics-to-datadog-openj9) to get the Datadog agent and Java container running. Then hit the following urls several times over the course of a fe minutes:
-  1. http://localhost:8080/
-  1. http://localhost:8080/slow
-  1. http://localhost:8080/sleepy
+    1. http://localhost:8080/
+    1. http://localhost:8080/slow
+    1. http://localhost:8080/sleepy
 What you should observe under OpenJ9 is that you'll only see one resource: https://cl.ly/1X0c131b0W0e.
 However if you examine the trace metrics themselves it appears that they do
 exist: https://cl.ly/1c0G2j3h2Q0Z.
@@ -86,9 +86,9 @@ If you repeat these steps under OpenJDK (follow the [Send APM Metrics to Datadog
 
 ## See APM in Datadog
 - Hit these web urls locally to generate some APM metrics and traces (be sure to [note the issues with OpenJ9](#issues-with-openj9)):
-  - http://localhost:8080
-  - http://localhost:8080/slow
-  - http://localhost:8080/sleepy
+    - http://localhost:8080
+    - http://localhost:8080/slow
+    - http://localhost:8080/sleepy
 - Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openj9` service should be listed.
 
 # Send APM Metrics to Datadog (OpenJDK)
@@ -104,9 +104,9 @@ docker run -d -p 8081:8080 --rm --name dd-java-apm-openjdk dd-java-apm-hello-wor
 
 ## See APM in Datadog
 - Hit these web urls locally to generate some APM metrics and traces:
-  - http://localhost:8081
-  - http://localhost:8081/slow
-  - http://localhost:8081/sleepy
+    - http://localhost:8081
+    - http://localhost:8081/slow
+    - http://localhost:8081/sleepy
 - Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openjdk` service should be listed.
 
 # Notes on Java APM Support
