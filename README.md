@@ -72,7 +72,7 @@ Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) an
 
 # Send APM Metrics to Datadog (OpenJDK)
 
-# Java APM
+# Notes on Java APM Support
 As of 2018/02/12 Java APM has out of the box support for many popular Java frameworks, app servers, and data stores - check the [Datadog APM docs for the up to date list](https://docs.datadoghq.com/tracing/languages/java/#integrations).
 - Java Servlet Compatible - Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc. Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
 - OkHTTP | 3.x
