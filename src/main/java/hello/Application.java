@@ -10,14 +10,14 @@ import datadog.trace.api.Trace;
 @RestController
 public class Application {
 
-    @Trace
     @RequestMapping("/")
+    @Trace
     public String home() {
         return "Hello Docker World";
     }
 
-    @Trace
     @RequestMapping("/slow")
+    @Trace
     public String slow() {
         try {
           Thread.sleep(5000);
