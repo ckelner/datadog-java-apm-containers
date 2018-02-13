@@ -52,5 +52,5 @@ docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world
 
 # Resources
 - https://github.com/DataDog/docker-dd-agent
--
+- https://docs.datadoghq.com/tracing/languages/java/#setup
 - https://docs.datadoghq.com/api/?lang=bash#tracing
