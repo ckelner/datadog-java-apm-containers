@@ -13,6 +13,10 @@ for container usage.
 - It does not make use any container orchestrator.
 - It's original intent was to be used on a developer's local machine.
 
+# TODO
+- Test on APM
+- Resolve [issues for OpenJ9](#issues-with-openj9)
+
 # Project Structure
 - [agent](./agent): Contains a [dockerfile](./agent/Dockerfile) and [datadog.conf](./agent/datadog.conf) for building the containerized Datadog agent locally w/ some minimal configuration.
 - [datadog](./datadog): Contains the `dd-java-agent.jar` version `0.3.0` as of 2018/02/12. Ideally this gets pulled in at build time and incorporated into the gradle build process.
@@ -62,7 +66,7 @@ docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
 - Run to stop the container: `docker stop dd-java-apm`
 - Run to remove the container: `docker rm dd-java-apm`
 
-### Issues with OpenJ9
+## Issues with OpenJ9
 These may be due to user error, and therefore may not be valid issues with OpenJ9. These are being reviewed for validity.
 
 1. When using the OpenJ9 JRE all resources (`/`, `/slow`, & `/sleepy`) are **NOT** reported.
