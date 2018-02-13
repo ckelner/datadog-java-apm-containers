@@ -6,17 +6,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import datadog.trace.api.Trace;
 
 @SpringBootApplication
 @RestController
 public class Application {
-    // kelnerhax - throw some output in logs to test tracing (know it loaded)
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Trace
     @RequestMapping("/")
     public String home() {
-        logger.info("Home loaded!");
         return "Hello Docker World";
+    }
+
+    @Trace
+    @RequestMapping("/slow")
+    public String slow() {
+        try {
+          Thread.sleep(5000);
+        } catch (Exception e) {
+          return "Kelnerhax: he ain't sleepy";
+        }
+        return "Hello Sleepy Docker World";
     }
 
     public static void main(String[] args) {
