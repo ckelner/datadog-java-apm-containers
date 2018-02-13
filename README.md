@@ -67,10 +67,10 @@ docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
 - Run to stop the container: `docker stop dd-java-apm`
 - Run to remove the container: `docker rm dd-java-apm`
 
-# Resources
-- https://github.com/DataDog/docker-dd-agent
-- https://docs.datadoghq.com/tracing/languages/java/#setup
-- https://docs.datadoghq.com/api/?lang=bash#tracing
+## See APM in Datadog
+Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openj9` service should be listed.
+
+# Send APM Metrics to Datadog (OpenJDK)
 
 # Java APM
 As of 2018/02/12 Java APM has out of the box support for many popular Java frameworks, app servers, and data stores - check the [Datadog APM docs for the up to date list](https://docs.datadoghq.com/tracing/languages/java/#integrations).
@@ -81,3 +81,8 @@ As of 2018/02/12 Java APM has out of the box support for many popular Java frame
 - JDBC | 4.x
 - MongoDB | 3.x
 - Cassandra | 3.2.x
+
+# Resources
+- https://github.com/DataDog/docker-dd-agent
+- https://docs.datadoghq.com/tracing/languages/java/#setup
+- https://docs.datadoghq.com/api/?lang=bash#tracing
