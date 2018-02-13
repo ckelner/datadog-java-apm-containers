@@ -53,7 +53,7 @@ Repo for testing/helping Datadog customer's get started with OpenJ9 Java APM usi
 
 ## Run the Java example
 - Run `./gradlew build` (or `gradlew.bat` if on windows)
-- Run to build the docker image: `docker build -t dd-java-apm-hello-world .`
+- Run to build the docker image: ```DD_AGENT_IP_ADDR=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dd-agent` docker build -t dd-java-apm-hello-world --build-arg DD_AGENT_IP=$DD_AGENT_IP_ADDR .```
 - Run to start the container:
   ```
   docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
@@ -95,7 +95,7 @@ If you repeat these steps under OpenJDK (follow the [Send APM Metrics to Datadog
 - Run the [Datadog Dockerized Agent as described in the OpenJ9 Section](#run-the-datadog-dockerized-agent)
 - Uncomment lines 28 through 41 in [Application.java](./src/main/java/hello/Application.java#L28-L41) to enable additional URLs to gather metrics and traces from
 - Run `./gradlew build` (or `gradlew.bat` if on windows)
-- Run to build the docker image: `docker build -t dd-java-apm-hello-world-openjdk -f Dockerfile-openjdk .`
+- Run to build the docker image: ```DD_AGENT_IP_ADDR=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dd-agent` docker build -t dd-java-apm-hello-world-openjdk --build-arg DD_AGENT_IP=$DD_AGENT_IP_ADDR -f Dockerfile-openjdk .```
 - Run to start the container:
   ```
   docker run -d -p 8081:8080 --rm --name dd-java-apm-openjdk dd-java-apm-hello-world-openjdk \
