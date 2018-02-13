@@ -1,12 +1,11 @@
 # OpenJ9 JVM Datadog APM Containers
 Repo for testing/helping Datadog customer's get started with OpenJ9 Java APM using Containers.
 
-***Note: THIS IS NOT MEANT TO BE A DISTRIBUTED TRACING EXAMPLE, SIMPLY HOW TO GET STARTED WITH DATADOG APM WITH THE OpenJ9 JVM AND DOCKER***
+***Note: This is not meant to be a distributed tracing example, but simply a small helpful project to get started with running with Datadog Java APM in a containerized environment. Additionally it tests the OpenJ9 JVM w/ the Datadog Java APM. It should not be used as a production-grade reference of any kind.***
 
 # Objectives
 - Get a sample Java application, running in a container using [IBM & Eclipse's JVM Distribution (OpenJ9)](https://en.wikipedia.org/wiki/OpenJ9), running and reporting Java APM metrics to Datadog via the Docker Datadog Agent.
-- Follow and adapt the [Datadog Java APM instructions](https://docs.datadoghq.com/tracing/languages/java/)
-for container usage.
+- Follow and adapt the [Datadog Java APM instructions](https://docs.datadoghq.com/tracing/languages/java/) for container usage.
 
 # Noteworthy
 - This small project is for demonstration purposes only.
