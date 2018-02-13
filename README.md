@@ -1,5 +1,7 @@
 # ibm-java-apm-containers
-Repo for testing/helping Datadog customer's get started with OpenJ9 Java APM using Containers
+Repo for testing/helping Datadog customer's get started with OpenJ9 Java APM using Containers.
+
+_*Note: THIS IS NOT MEANT TO BE A DISTRIBUTED TRACING EXAMPLE, SIMPLY HOW TO GET STARTED WITH DATADOG APM WITH JAVA AND DOCKER*_
 
 # Objectives
 - Get a sample Java application, running in a container using [IBM's JVM (OpenJ9)](https://en.wikipedia.org/wiki/OpenJ9), running and reporting Java APM metrics to Datadog.
