@@ -16,17 +16,6 @@ public class Application {
         return "Hello Docker World";
     }
 
-    @RequestMapping("/slow")
-    @Trace
-    public String slow() {
-        try {
-          Thread.sleep(5000);
-        } catch (Exception e) {
-          return "Kelnerhax: he ain't sleepy";
-        }
-        return "Hello Sleepy Docker World";
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
