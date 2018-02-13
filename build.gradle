@@ -27,4 +27,5 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile group: 'com.datadoghq', name: 'dd-trace-ot', version: '0.3.0'
 }
