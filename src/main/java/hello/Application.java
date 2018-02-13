@@ -10,22 +10,27 @@ import datadog.trace.api.Trace;
 @RestController
 public class Application {
 
+    /* NOTE: @ckelner:
+      When using the OpenJ9 JRE not all resources are reported. It appears
+      to be related to https://gist.github.com/ckelner/ffbd6182bdff27929715a0d85ac991b4
+      Hit the following urls
+      localhost:<port>/slow
+      localhost:<port>/sleepy
+      And under OpenJ9 you'll only see one resource: https://cl.ly/1X0c131b0W0e
+      However if you examine the trace metrics themselves it appears that they do
+      exist: https://cl.ly/1c0G2j3h2Q0Z
+      Under OpenJDK each of these resources will report as seen here: https://cl.ly/1i3N151Y3g0e
+    */
     @RequestMapping("/")
+    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed for OpenJDK */
+    @Trace
     public String home() {
         return "Hello Docker World";
     }
 
-    /* NOTE: @ckelner:
-      These can be uncommented and used with the OpenJDK relase, however
-      when using the OpenJ9 JRE this causes traces not to be reported. It appears
-      to be related to https://gist.github.com/ckelner/ffbd6182bdff27929715a0d85ac991b4
-      Uncomment these lines when you build with OpenJDK and you can hit the following urls
-      localhost:<port>/slow
-      localhost:<port>/sleepy
-      And you'll see them report into Datadog: https://cl.ly/1a1X0d0i3B40
-    */
-    /*
     @RequestMapping("/slow")
+    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed for OpenJDK */
+    @Trace
     public String slow() {
         try {
           Thread.sleep(5000);
@@ -36,10 +41,11 @@ public class Application {
     }
 
     @RequestMapping("/sleepy")
+    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed for OpenJDK */
+    @Trace
     public String sleepy() {
         return "Hello Sleepy Docker World";
     }
-    */
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
