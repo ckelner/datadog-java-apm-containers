@@ -86,7 +86,11 @@ If you repeat these steps under OpenJDK (follow the [Send APM Metrics to Datadog
   - TODO: This should probably get covered as part of the gradle build process
 
 ## See APM in Datadog
-Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openj9` service should be listed.
+- Hit these web urls locally to generate some APM metrics and traces (be sure to [note the issues with OpenJ9](#issues-with-openj9)):
+  - http://localhost:8080
+  - http://localhost:8080/slow
+  - http://localhost:8080/sleepy
+- Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openj9` service should be listed.
 
 # Send APM Metrics to Datadog (OpenJDK)
 - Run the [Datadog Dockerized Agent as described in the OpenJ9 Section](#run-the-datadog-dockerized-agent)
@@ -98,6 +102,13 @@ Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) an
 docker run -d -p 8081:8080 --rm --name dd-java-apm-openjdk dd-java-apm-hello-world-openjdk \
 -e TAGS=host:dd-java-apm-demo-openjdk,env:demo
 ```
+
+## See APM in Datadog
+- Hit these web urls locally to generate some APM metrics and traces:
+  - http://localhost:8081
+  - http://localhost:8081/slow
+  - http://localhost:8081/sleepy
+- Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openjdk` service should be listed.
 
 # Notes on Java APM Support
 As of 2018/02/12 Java APM has out of the box support for many popular Java frameworks, app servers, and data stores - check the [Datadog APM docs for the up to date list](https://docs.datadoghq.com/tracing/languages/java/#integrations).
