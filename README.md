@@ -13,7 +13,8 @@ for container usage. See [Dockerfile](./Dockerfile).
 
 # Getting Started
 ## Run the Datadog Dockerized Agent
-Run the following, replacing `{your_api_key_here}` with your own DD API key.
+- Run to build the image: `docker build -t dd-agent ./agent/`
+- Run the following, replacing `{your_api_key_here}` with your own DD API key.
 ```
 docker run -d --rm --name dd-agent \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -23,7 +24,10 @@ docker run -d --rm --name dd-agent \
   -e DD_APM_ENABLED=true \
   -p 8126:8126/tcp \
   -e SD_BACKEND=docker \
-  datadog/docker-dd-agent:12.5.5212
+  -e LOG_LEVEL=DEBUG \
+  -e DD_LOGS_STDOUT=yes \
+  -e DD_PROCESS_AGENT_ENABLED=true \
+  dd-agent
 ```
 
 ## Run the Java example
@@ -34,15 +38,19 @@ docker run -d --rm --name dd-agent \
 - Run `wget -O datadog/dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'`
   - TODO: This should probably get covered as part of the gradle build process
 - Run to build the image: `docker build -t dd-java-apm-hello-world .`
-- Run to start the container, replacing `{your_api_key_here}` with your own DD API key:
+- Run to start the container:
 ```
-docker run -d --rm --name dd-java-apm dd-java-apm-hello-world \
-  --link dd-agent
-  -p 8080:8080 \
-  -e API_KEY={your_api_key_here} \
+docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
+--link dd-agent \
+-e DD_APM_ENABLED=true
 ```
 - Run to see the containers running: `docker ps`
 - Run to see container logs: `docker logs dd-java-apm`
 - Run to get to bash prompt for the container: `docker exec -it dd-java-apm /bin/bash`
 - Run to stop the container: `docker stop dd-java-apm`
 - Run to remove the container: `docker rm dd-java-apm`
+
+# Resources
+- https://github.com/DataDog/docker-dd-agent
+-
+- https://docs.datadoghq.com/api/?lang=bash#tracing
