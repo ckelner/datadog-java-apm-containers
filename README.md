@@ -111,6 +111,13 @@ Get a sample Java application, running in a container using and reporting Java A
   ```
 - See [Additional Docker commands](#additional-docker-commands) above for more docker CLI cmds.
 
+## See APM in Datadog
+- Hit these web urls locally to generate some APM metrics and traces (be sure to [note the issues with OpenJ9](#issues-with-openj9)):
+    - http://localhost:8080
+    - http://localhost:8080/slow
+    - http://localhost:8080/sleepy
+- Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openj9` service should be listed.
+
 ## Issues with OpenJ9
 These may be due to user error, and therefore may not be valid issues with OpenJ9. These are being reviewed for validity.
 
@@ -125,13 +132,6 @@ exist: https://cl.ly/1c0G2j3h2Q0Z.
 If you repeat these steps under OpenJDK (follow the [Send APM Metrics to Datadog (OpenJDK)](send-apm-metrics-to-datadog-openjdk) section) each of these resources will report as seen here: https://cl.ly/1i3N151Y3g0e.
 1. [This error shows up in the logs](https://gist.github.com/ckelner/ffbd6182bdff27929715a0d85ac991b4) even with [Application.java](https://github.com/ckelner/OpenJ9-jvm-datadog-apm-containers/blob/5d00c7d6fbdb440ee1171d07442afa5d40533dd7/src/main/java/hello/Application.java) in its most simple form (revision `5d00c7d6fbdb440ee1171d07442afa5d40533dd7`); This may or may not be related to the issue above.
 1. Under OpenJ9, the `@Trace` annotation was required with Spring Boot - under OpenJDK this is not required (simply comment out the `@Trace` annotations and build the jar and run the docker container to verify).
-
-## See APM in Datadog
-- Hit these web urls locally to generate some APM metrics and traces (be sure to [note the issues with OpenJ9](#issues-with-openj9)):
-    - http://localhost:8080
-    - http://localhost:8080/slow
-    - http://localhost:8080/sleepy
-- Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openj9` service should be listed.
 
 # Hacks
 - The `dd-java-agent.jar` is stored in this repo at version `0.3.0` - it may need to be updated, to do so run `wget -O datadog/dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'` and place the jar in the [./datadog](./datadog) directory.
