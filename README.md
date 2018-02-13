@@ -42,7 +42,8 @@ docker run -d --rm --name dd-agent \
 - Run to build the image: `docker build -t dd-java-apm-hello-world .`
 - Run to start the container:
 ```
-docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world
+docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
+-e TAGS=host:dd-java-apm-demo,env:demo
 ```
 - Run to see the containers running: `docker ps`
 - Run to see container logs: `docker logs dd-java-apm`
