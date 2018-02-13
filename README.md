@@ -69,7 +69,7 @@ Repo for testing/helping Datadog customer's get started with OpenJ9 Java APM usi
 These may be due to user error, and therefore may not be valid issues with OpenJ9. These are being reviewed for validity.
 
 1. When using the OpenJ9 JRE all resources (`/`, `/slow`, & `/sleepy`) are **NOT** reported.
-To reproduce, follow the instructions in the section [Send APM Metrics to Datadog (OpenJ9)](#send-apm-metrics-to-datadog-openj9) to get the Datadog agent and Java container running. Then hit the following urls several times over the course of a fe minutes:
+To reproduce, follow the instructions in the section [Send APM Metrics to Datadog (OpenJ9)](#send-apm-metrics-to-datadog-openj9) to get the Datadog agent and Java container running. Then hit the following urls several times over the course of a few minutes:
     1. http://localhost:8080/
     1. http://localhost:8080/slow
     1. http://localhost:8080/sleepy
