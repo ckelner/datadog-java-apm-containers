@@ -11,7 +11,6 @@ import datadog.trace.api.Trace;
 public class Application {
 
     @RequestMapping("/")
-    @Trace
     public String home() {
         return "Hello Docker World";
     }
