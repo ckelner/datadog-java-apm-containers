@@ -62,6 +62,25 @@ docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
 - Run to stop the container: `docker stop dd-java-apm`
 - Run to remove the container: `docker rm dd-java-apm`
 
+### Issues with OpenJ9
+These may be due to user error, and therefore may not be valid issues with OpenJ9. These are being reviewed for validity.
+
+1. When using the OpenJ9 JRE all resources (`/`, `/slow`, & `/sleepy`) are **NOT** reported.
+To reproduce, follow the instructions in the section [Send APM Metrics to Datadog (OpenJ9)](#send-apm-metrics-to-datadog-openj9) to get the Datadog agent and Java container running. Then hit the following urls several times over the course of a fe minutes:
+  1. http://localhost:8080/
+  1. http://localhost:8080/slow
+  1. http://localhost:8080/sleepy
+What you should observe under OpenJ9 is that you'll only see one resource: https://cl.ly/1X0c131b0W0e.
+However if you examine the trace metrics themselves it appears that they do
+exist: https://cl.ly/1c0G2j3h2Q0Z.
+If you repeat these steps under OpenJDK (follow the [Send APM Metrics to Datadog (OpenJDK)](send-apm-metrics-to-datadog-openjdk) section) each of these resources will report as seen here: https://cl.ly/1i3N151Y3g0e.
+1. [This error shows up in the logs](https://gist.github.com/ckelner/ffbd6182bdff27929715a0d85ac991b4) even with [Application.java](https://github.com/ckelner/OpenJ9-jvm-datadog-apm-containers/blob/5d00c7d6fbdb440ee1171d07442afa5d40533dd7/src/main/java/hello/Application.java) in its most simple form (revision `5d00c7d6fbdb440ee1171d07442afa5d40533dd7`); This may or may not be related to the issue above.
+1. Under OpenJ9, the `@Trace` annotation was required with Spring Boot - under OpenJDK this is not required (simply comment out the `@Trace` annotations and build the jar and run the docker container to verify).
+
+### Hacks
+- The `dd-java-agent.jar` is stored in this repo at version `0.3.0` - it may need to be updated, to do so run `wget -O datadog/dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'` and place the jar in the [./datadog](./datadog) directory.
+  - TODO: This should probably get covered as part of the gradle build process
+
 ## See APM in Datadog
 Visit [Datadog APM env:demo](https://app.datadoghq.com/apm/services?env=demo) and the `dd-java-apm-example-openj9` service should be listed.
 
