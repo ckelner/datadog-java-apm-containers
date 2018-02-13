@@ -3,6 +3,29 @@ Repo for Datadog customers to get started with Java APM using Containers.
 
 ***Note: This is not meant to be a distributed tracing example, but simply a small helpful project to get started with running with Datadog Java APM in a containerized environment. Additionally it tests the OpenJ9 JVM w/ the Datadog Java APM. It should not be used as a production-grade reference of any kind.***
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+- [Objectives](#objectives)
+- [Noteworthy](#noteworthy)
+- [TODO](#todo)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Send APM Metrics to Datadog (OpenJDK)](#send-apm-metrics-to-datadog-openjdk)
+  - [Run the Datadog Dockerized Agent](#run-the-datadog-dockerized-agent)
+  - [Run the Java example](#run-the-java-example)
+  - [Additional Docker commands](#additional-docker-commands)
+  - [See APM in Datadog](#see-apm-in-datadog)
+- [Send APM Metrics to Datadog (OpenJ9)](#send-apm-metrics-to-datadog-openj9)
+  - [Run the Java example](#run-the-java-example-1)
+  - [Issues with OpenJ9](#issues-with-openj9)
+  - [See APM in Datadog](#see-apm-in-datadog-1)
+- [Hacks](#hacks)
+- [Notes on Java APM Support](#notes-on-java-apm-support)
+- [Resources](#resources)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Objectives
 Get a sample Java application, running in a container using and reporting Java APM metrics to Datadog via the Dockerized Datadog Agent.
 
