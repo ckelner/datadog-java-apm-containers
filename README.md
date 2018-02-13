@@ -11,7 +11,7 @@ for container usage.
 # Noteworthy
 - This small project is for demonstration purposes only.
 - It does not make use any container orchestrator.
-- It's original intent was to be used on a developers local machine.
+- It's original intent was to be used on a developer's local machine.
 
 # Project Structure
 -
