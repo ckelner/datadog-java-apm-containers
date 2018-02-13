@@ -29,7 +29,7 @@ for container usage.
 - Install Java (Either OpenJ9 or your favorite flavor (OpenJDK, Oracle, etc)) for your platform
 - Install Docker for your platform
 
-# Send APM Metrics to Datadog
+# Send APM Metrics to Datadog (OpenJ9)
 ## Run the Datadog Dockerized Agent
 - Run to build the image: `docker build -t dd-agent ./agent/`
 - Run the following, replacing `{your_api_key_here}` with your own DD API key.
