@@ -1,4 +1,4 @@
-FROM openjdk:9-jre
+FROM ibmjava:jre
 ARG DD_AGENT_IP
 ENV DD_IP=${DD_AGENT_IP}
 
