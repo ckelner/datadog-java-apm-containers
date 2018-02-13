@@ -4,16 +4,23 @@ Repo for testing/helping Datadog customer's get started with OpenJ9 Java APM usi
 _*Note: THIS IS NOT MEANT TO BE A DISTRIBUTED TRACING EXAMPLE, SIMPLY HOW TO GET STARTED WITH DATADOG APM WITH JAVA AND DOCKER*_
 
 # Objectives
-- Get a sample Java application, running in a container using [IBM's JVM (OpenJ9)](https://en.wikipedia.org/wiki/OpenJ9), running and reporting Java APM metrics to Datadog.
+- Get a sample Java application, running in a container using [IBM's JVM (OpenJ9)](https://en.wikipedia.org/wiki/OpenJ9), running and reporting Java APM metrics to Datadog via the Docker Datadog Agent.
+- Follow and adapt the [Datadog Java APM instructions](https://docs.datadoghq.com/tracing/languages/java/)
+for container usage.
 
-- Follow and adapt the [Datadog instructions](https://docs.datadoghq.com/tracing/languages/java/)
-for container usage. See [Dockerfile](./Dockerfile).
+# Noteworthy
+- This small project is for demonstration purposes only.
+- It does not make use any container orchestrator.
+- It's original intent was to be used on a developers local machine.
+
+# Project Structure
+-
 
 # Prerequisites
 - Install Java (Either OpenJ9 or your favorite flavor (OpenJDK, Oracle, etc)) for your platform
 - Install Docker for your platform
 
-# Getting Started
+# Send APM Metrics to Datadog
 ## Run the Datadog Dockerized Agent
 - Run to build the image: `docker build -t dd-agent ./agent/`
 - Run the following, replacing `{your_api_key_here}` with your own DD API key.
@@ -55,3 +62,13 @@ docker run -d -p 8080:8080 --rm --name dd-java-apm dd-java-apm-hello-world \
 - https://github.com/DataDog/docker-dd-agent
 - https://docs.datadoghq.com/tracing/languages/java/#setup
 - https://docs.datadoghq.com/api/?lang=bash#tracing
+
+# Java APM
+As of 2018/02/12 Java APM has out of the box support for many popular Java frameworks, app servers, and data stores - check the [Datadog APM docs for the up to date list](https://docs.datadoghq.com/tracing/languages/java/#integrations).
+- Java Servlet Compatible - Many application servers are Servlet compatible, such as Tomcat, Jetty, Websphere, Weblogic, etc. Also, frameworks like Spring Boot and Dropwizard inherently work because they use a Servlet compatible embedded application server.
+- OkHTTP | 3.x
+- Apache HTTP Client | 4.3 +
+- JMS 2 | 2.x
+- JDBC | 4.x
+- MongoDB | 3.x
+- Cassandra | 3.2.x
