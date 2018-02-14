@@ -22,14 +22,14 @@ public class Application {
       Under OpenJDK each of these resources will report as seen here: https://cl.ly/1i3N151Y3g0e
     */
     @RequestMapping("/")
-    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed for OpenJDK */
+    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed when using OpenJDK */
     @Trace
     public String home() {
         return "Hello Docker World";
     }
 
     @RequestMapping("/slow")
-    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed for OpenJDK */
+    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed when using OpenJDK */
     @Trace
     public String slow() {
         try {
@@ -41,7 +41,7 @@ public class Application {
     }
 
     @RequestMapping("/sleepy")
-    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed for OpenJDK */
+    /* NOTE: @ckelner: @Trace Only required for OpenJ9 - can be removed when using OpenJDK */
     @Trace
     public String sleepy() {
         return "Hello Sleepy Docker World";
