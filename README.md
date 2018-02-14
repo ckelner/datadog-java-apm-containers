@@ -6,6 +6,7 @@ Repo for Datadog customers to get started with Java APM using Containers.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
+
 - [Objectives](#objectives)
 - [Noteworthy](#noteworthy)
 - [TODO](#todo)
@@ -18,8 +19,8 @@ Repo for Datadog customers to get started with Java APM using Containers.
   - [See APM in Datadog](#see-apm-in-datadog)
 - [Send APM Metrics to Datadog (OpenJ9)](#send-apm-metrics-to-datadog-openj9)
   - [Run the Java example](#run-the-java-example-1)
-  - [Issues with OpenJ9](#issues-with-openj9)
   - [See APM in Datadog](#see-apm-in-datadog-1)
+  - [Issues with OpenJ9](#issues-with-openj9)
 - [Hacks](#hacks)
 - [Notes on Java APM Support](#notes-on-java-apm-support)
 - [Resources](#resources)
