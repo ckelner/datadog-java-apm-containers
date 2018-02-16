@@ -21,6 +21,8 @@ Repo for Datadog customers to get started with Java APM using Containers.
   - [Run the Java example](#run-the-java-example-1)
   - [See APM in Datadog](#see-apm-in-datadog-1)
   - [Issues with OpenJ9](#issues-with-openj9)
+- [Clojure](#clojure)
+  - [Run the Clojure example](#run-the-clojure-example)
 - [Hacks](#hacks)
 - [Notes on Java APM Support](#notes-on-java-apm-support)
 - [Resources](#resources)
@@ -42,6 +44,7 @@ Get a sample Java application, running in a container using and reporting Java A
 
 # Project Structure
 - [agent](./agent): Contains a [dockerfile](./agent/Dockerfile) and [datadog.conf](./agent/datadog.conf) for building the containerized Datadog agent locally w/ some minimal configuration.
+- [clojure](./clojure): Contains a clojure project for testing, see the [Clojure](#clojure) section for more info
 - [datadog](./datadog): Contains the `dd-java-agent.jar` version `0.3.0` as of 2018/02/12. Ideally this gets pulled in at build time and incorporated into the gradle build process.
 - [gradle](./gradle): for gradle wrapper (run across multiple platforms)
 - [src](./src/main/java/hello): Contains our very simple Sprint Boot application code.
@@ -133,6 +136,22 @@ To reproduce, follow the instructions in the section [Send APM Metrics to Datado
     If you repeat these steps under OpenJDK (follow the [Send APM Metrics to Datadog (OpenJDK)](send-apm-metrics-to-datadog-openjdk) section) each of these resources will report as seen here: https://cl.ly/1i3N151Y3g0e.
 1. [This error shows up in the logs](https://gist.github.com/ckelner/ffbd6182bdff27929715a0d85ac991b4) even with [Application.java](https://github.com/ckelner/OpenJ9-jvm-datadog-apm-containers/blob/5d00c7d6fbdb440ee1171d07442afa5d40533dd7/src/main/java/hello/Application.java) in its most simple form (revision `5d00c7d6fbdb440ee1171d07442afa5d40533dd7`); This may or may not be related to the issue above.
 1. Under OpenJ9, the `@Trace` annotation was required with Spring Boot - under OpenJDK this is not required (simply comment out the `@Trace` annotations and build the jar and run the docker container to verify).
+
+# Clojure
+**THIS IS CURRENTLY A WIP -- DOES NOT WORK AT THIS TIME**
+- Run the [Datadog Dockerized Agent as described in the OpenJ9 Section](#run-the-datadog-dockerized-agent)
+
+## Run the Clojure example
+- Install [leiningen](https://leiningen.org/)
+- Change into the clojure dir: `cd clojure`
+- Run `lein uberjar`
+- Run to build the docker image: ```DD_AGENT_IP_ADDR=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dd-agent` docker build -t dd-java-apm-c-oj --build-arg DD_AGENT_IP=$DD_AGENT_IP_ADDR -f Dockerfile-clojure-oj .```
+- Run to start the container:
+  ```
+  docker run -d -p 8080:8080 --rm --name dd-java-apm-c-oj dd-java-apm-c-oj \
+  -e TAGS=host:dd-java-apm-demo-clojure-openjdk,env:demo
+  ```
+- See [Additional Docker commands](#additional-docker-commands) above for more docker CLI cmds.
 
 # Hacks
 - The `dd-java-agent.jar` is stored in this repo at version `0.3.0` - it may need to be updated, to do so run `wget -O datadog/dd-java-agent.jar 'https://search.maven.org/remote_content?g=com.datadoghq&a=dd-java-agent&v=LATEST'` and place the jar in the [./datadog](./datadog) directory.
