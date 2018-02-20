@@ -21,6 +21,9 @@ Repo for Datadog customers to get started with Java APM using Containers.
   - [Run the Java example](#run-the-java-example-1)
   - [See APM in Datadog](#see-apm-in-datadog-1)
   - [Issues with OpenJ9](#issues-with-openj9)
+- [Scala](#scala)
+  - [Run the Scala example](#run-the-scala-example)
+  - [See APM in Datadog](#see-apm-in-datadog-2)
 - [Clojure](#clojure)
   - [Run the Clojure example](#run-the-clojure-example)
 - [Hacks](#hacks)
@@ -136,6 +139,38 @@ To reproduce, follow the instructions in the section [Send APM Metrics to Datado
     If you repeat these steps under OpenJDK (follow the [Send APM Metrics to Datadog (OpenJDK)](send-apm-metrics-to-datadog-openjdk) section) each of these resources will report as seen here: https://cl.ly/1i3N151Y3g0e.
 1. [This error shows up in the logs](https://gist.github.com/ckelner/ffbd6182bdff27929715a0d85ac991b4) even with [Application.java](https://github.com/ckelner/OpenJ9-jvm-datadog-apm-containers/blob/5d00c7d6fbdb440ee1171d07442afa5d40533dd7/src/main/java/hello/Application.java) in its most simple form (revision `5d00c7d6fbdb440ee1171d07442afa5d40533dd7`); This may or may not be related to the issue above.
 1. Under OpenJ9, the `@Trace` annotation was required with Spring Boot - under OpenJDK this is not required (simply comment out the `@Trace` annotations and build the jar and run the docker container to verify).
+
+# Scala
+- Run the [Datadog Dockerized Agent as described in the OpenJ9 Section](#run-the-datadog-dockerized-agent)
+
+## Run the Scala example
+- Install [sbt](https://www.playframework.com/documentation/2.6.x/Installing#Installing-Play-with-SBT) - `brew install sbt@1` on OSX
+- Change into the Scala directory: `cd scala`
+- Run `sbt update` (_likely not necessary_)
+- Run `sbt dist` (_likely not necessary_)
+- Run `sbt assembly` to compile fat jar
+    - Should result in something similar to:
+      ```
+      [info] Packaging /projects/java-apm-containers/scala/target/scala-2.12/hello-world-assembly-1.0-SNAPSHOT.jar ...
+      [info] Done packaging.
+      ```
+- To test the Scala project locally outside Docker, run `sbt run`
+- Change back to the root project directory `cd ..`
+- Double check that `[Dockerfile-scala-oj](./Dockerfile-scala-oj)` contains the correct path to the scala jar in the target directory (changes based on scala version)
+- Run to build the docker image: ```DD_AGENT_IP_ADDR=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dd-agent` docker build -t dd-java-apm-scala-oj --build-arg DD_AGENT_IP=$DD_AGENT_IP_ADDR -f Dockerfile-scala-oj .```
+- Run to start the container:
+  ```
+  docker run -d -p 9000:9000 --rm --name dd-java-apm-scala-oj dd-java-apm-scala-oj \
+  -e TAGS=host:dd-java-apm-demo-scala-oj,env:demo
+  ```
+- See [Additional Docker commands](#additional-docker-commands) above for more docker CLI cmds.
+
+## See APM in Datadog
+- Hit these web urls locally:
+    - http://localhost:9000
+    - http://localhost:9000/count
+    - http://localhost:9000/message
+- Currently these do not appear to generate any APM traces or metrics OOTB (and the Datadog java apm agent doesn't produce any logs for these routes)
 
 # Clojure
 **THIS IS CURRENTLY A WIP -- DOES NOT WORK AT THIS TIME**
