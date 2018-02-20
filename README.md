@@ -156,7 +156,7 @@ To reproduce, follow the instructions in the section [Send APM Metrics to Datado
       ```
 - To test the Scala project locally outside Docker, run `sbt run`
 - Change back to the root project directory `cd ..`
-- Double check that `[Dockerfile-scala-oj](./Dockerfile-scala-oj)` contains the correct path to the scala jar in the target directory (changes based on scala version)
+- Double check that [`Dockerfile-scala-oj`](./Dockerfile-scala-oj) contains the correct path to the scala jar in the target directory (changes based on scala version)
 - Run to build the docker image: ```DD_AGENT_IP_ADDR=`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dd-agent` docker build -t dd-java-apm-scala-oj --build-arg DD_AGENT_IP=$DD_AGENT_IP_ADDR -f Dockerfile-scala-oj .```
 - Run to start the container:
   ```
