@@ -1,0 +1,15 @@
+FROM openjdk:9-jre
+ARG DD_AGENT_IP
+ENV DD_IP=${DD_AGENT_IP}
+
+# copy over our app
+WORKDIR /app
+# THIS PATH WILL VARY BASED ON SCALA VERSION
+COPY scala/build/libs/hello-world-assembly-1.0-SNAPSHOT.jar /app
+# Might be hacky -- dunno
+COPY datadog/dd-java-agent.jar /app
+
+EXPOSE 9000
+
+# use shell form of entrypoint rather than exec so we can take advantage of variables
+ENTRYPOINT java -javaagent:/app/dd-java-agent.jar -Ddd.service.name=dd-java-apm-example-scala-openjdk -Ddd.agent.host=$DD_IP -Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug -jar /app/hello-world-assembly-1.0-SNAPSHOT.jar
