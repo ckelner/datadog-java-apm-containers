@@ -13,10 +13,10 @@ scalaVersion := "2.12.4"
 crossScalaVersions := Seq("2.11.12", "2.12.4")
 
 libraryDependencies += guice
-//libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
-//libraryDependencies += "com.h2database" % "h2" % "1.4.196"
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+libraryDependencies += "com.h2database" % "h2" % "1.4.196"
 // https://stackoverflow.com/questions/46450250/play-framework-dev-server-shutting-down-after-refreshing
-//libraryDependencies += "javax.xml.bind" % "jaxb-api" % "2.1"
+libraryDependencies += "javax.xml.bind" % "jaxb-api" % "2.1"
 
 test in assembly := {}
 
